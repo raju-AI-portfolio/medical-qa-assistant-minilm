@@ -1,8 +1,6 @@
-# medical-qa-assistant-minilm
-Lightweight Medical Q&amp;A Assistant built by fine-tuning MiniLM on curated MedQuAD dataset with AutoTrain.
 
 # 🏥 Medical Q&A Assistant  
-Fine-tuning `all-MiniLM-L6-v2` using Hugging Face AutoTrain
+Lightweight Medical Q&A Assistant built by fine-tuning MiniLM on curated MedQuAD dataset with AutoTrain.
 
 ---
 
