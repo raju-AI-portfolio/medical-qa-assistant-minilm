@@ -1,118 +1,89 @@
 # medical-qa-assistant-minilm
 Lightweight Medical Q&amp;A Assistant built by fine-tuning MiniLM on curated MedQuAD dataset with AutoTrain.
-🧠 Medical Q&A Assistant
-Fine-Tuning all-MiniLM-L6-v2 Using Hugging Face AutoTrain
-📌 Project Overview
 
-This project demonstrates fine-tuning a lightweight sentence transformer model (all-MiniLM-L6-v2) on a curated Medical Question Answering dataset (MedQuAD subset) using Hugging Face AutoTrain.
+# 🏥 Medical Q&A Assistant  
+Fine-tuning `all-MiniLM-L6-v2` using Hugging Face AutoTrain
 
-The goal is to build a domain-specialized medical Q&A assistant capable of generating context-aware, medically relevant responses across 40 different medical focus areas.
+---
 
-The final solution is deployed via a Gradio interface in Google Colab for interactive testing.
+## 📌 Project Overview
 
-🎯 Objectives
+This project demonstrates the fine-tuning of a lightweight language model, **sentence-transformers/all-MiniLM-L6-v2**, for domain-specific **Medical Question Answering (Q&A)** using Hugging Face AutoTrain.
 
-Fine-tune a Mini Language Model for domain-specific medical Q&A
+The goal is to build a **domain-specialized medical Q&A assistant** capable of generating reliable, context-aware responses to healthcare-related queries.
 
-Ensure balanced performance across 40 medical categories
+The final solution includes:
+- Dataset preparation
+- Model fine-tuning using AutoTrain
+- Deployment via Gradio interface
+- Model publishing to Hugging Face Hub
 
-Build a lightweight, deployable medical assistant prototype
+---
 
-Demonstrate end-to-end workflow:
+## 🎯 Objectives
 
-Data preparation
+- Fine-tune MiniLM on a curated medical Q&A dataset
+- Ensure balanced learning across 40 medical focus areas
+- Develop a lightweight medical assistant prototype
+- Deploy and test using a Gradio web interface
+- Compare fine-tuned vs. base model performance
 
-Model fine-tuning
+---
 
-Model deployment
+## 🧠 Problem Statement
 
-Functional testing via Gradio
+Medical question-answering systems must handle diverse conditions, complex terminology, and sensitive health-related queries.
 
-🚩 Problem Statement
+Large language models without domain adaptation may generate:
+- Generic responses
+- Inaccurate medical advice
+- Poor contextual grounding
 
-General-purpose LLMs may generate generic or inaccurate responses when dealing with medical queries. Healthcare applications require:
+This project addresses this challenge by fine-tuning MiniLM on a curated subset of the **MedQuAD dataset**, improving domain-specific accuracy and reliability.
 
-Domain adaptation
+---
 
-Balanced topic coverage
+## 📊 Dataset Description
 
-Controlled fine-tuning
+**Dataset Name:** `clean_MedQuAD_autotrain_ready.csv`  
+**Source:** Curated subset of MedQuAD  
+**Total Samples:** 520 rows  
 
-Reliable answer mapping
+### Structure
+- **40 medical focus categories**
+- **13 Q&A pairs per category**
+- Balanced sampling across conditions
 
-This project fine-tunes a MiniLM model using a curated MedQuAD subset to improve accuracy and contextual reliability for healthcare-related questions.
+### Columns
+- `Question` – User-style medical queries  
+- `Answer` – Curated medical responses  
 
-📊 Dataset Description
+### Example Focus Areas
+- Alzheimer’s Disease
+- Breast Cancer
+- Diabetes
+- Heart Disease
+- Asthma
+- Stroke
+- Prostate Cancer
 
-Dataset Name: clean_MedQuAD_autotrain_ready.csv
-Source: Curated subset of MedQuAD
-Type: Extractive Question Answering
-Size: 520 rows
-Structure:
+The balanced sampling ensures uniform representation across medical domains.
 
-40 medical focus categories
+---
 
-13 Q&A pairs per category (balanced sampling)
+## 🛠️ Model Details
 
-Columns
-Column	Description
-Question	User-style medical query
-Answer	Concise curated medical response
-Sample Focus Areas
+| Component | Value |
+|-----------|--------|
+| Task | Sentence Transformer Question Answering |
+| Base Model | sentence-transformers/all-MiniLM-L6-v2 |
+| Training Platform | Hugging Face AutoTrain |
+| Hardware | CPU (Hugging Face Space) |
+| Parameter Mode | Basic |
 
-Alzheimer’s Disease
+### Hyperparameters Used
 
-Breast Cancer
-
-Diabetes
-
-Heart Disease
-
-Asthma
-
-Stroke
-
-Prostate Cancer
-
-Balanced sampling ensures uniform representation across topics.
-
-👤 User Scenario
-
-A caregiver supporting a family member diagnosed with Alzheimer’s disease may ask:
-
-“What are the early warning signs of Alzheimer’s?”
-
-“Is there treatment to slow progression?”
-
-“How can families provide support?”
-
-The fine-tuned assistant retrieves medically relevant responses grounded in trusted Q&A pairs.
-
-Similarly, users can ask:
-
-“What foods should a person with diabetes avoid?”
-
-The system provides concise, context-aware medical guidance.
-
-🏗 Model & Training Details
-
-Base Model:
-sentence-transformers/all-MiniLM-L6-v2
-
-Task Type:
-Semantic Textual Question Answering
-
-Training Platform:
-Hugging Face AutoTrain (CPU Basic Space)
-
-⚙️ Fine-Tuning Configuration
-Column Mapping
-
-sentence1 → Question
-
-sentence2 → Answer
-
-Hyperparameters
+```json
 {
   "optimizer": "adamw_torch",
   "scheduler": "linear",
@@ -122,118 +93,101 @@ Hyperparameters
   "lr": "0.00005",
   "max_seq_length": "128"
 }
+```
 
-🚀 Training Workflow
-1️⃣ Setup AutoTrain Space
+---
 
-Create new project
+## 🚀 Implementation Steps
 
-Select CPU Basic hardware
+### Step 1: Setup AutoTrain
+- Created new project in Hugging Face AutoTrain
+- Duplicated space with CPU Basic hardware
+- Authorized access to Hugging Face account
 
-Authorize Hugging Face account
+### Step 2: Configure Project
+- Task: ST Question Answering
+- Base Model: `all-MiniLM-L6-v2`
+- Parameter Mode: Basic
 
-2️⃣ Configure Project
+### Step 3: Upload Dataset
+- Dataset source: Local
+- Column mapping:
+  - `sentence1` → Question
+  - `sentence2` → Answer
 
-Task: ST Question Answering
+### Step 4: Fine-Tuning
+- Started AutoTrain job
+- Monitored logs
+- Training completed successfully
+- Model pushed to Hugging Face Hub
 
-Parameter Mode: Basic
+### Step 5: Model Deployment
+- Accessed fine-tuned model via Hugging Face Model Hub
+- Integrated model into Gradio interface
 
-Select base model
+---
 
-Name project
+## 🖥️ Gradio Interface
 
-3️⃣ Upload Dataset
+A simple Gradio web application was created to test the fine-tuned model.
 
-Upload CSV file
+Users can input medical queries such as:
 
-Map columns correctly
+- "What are the early warning signs of Alzheimer’s disease?"
+- "What foods should a person with diabetes avoid?"
+- "Is there treatment available for stroke recovery?"
 
-Adjust hyperparameters
+The assistant returns medically relevant responses grounded in the fine-tuned dataset.
 
-4️⃣ Start Training
+---
 
-Monitor logs:
+## 👤 User Scenario
 
-Setting up training arguments
+Imagine a caregiver supporting a family member diagnosed with Alzheimer’s disease.
 
-Starting training
+Instead of searching multiple websites, they can ask:
 
-Finished training
+> “How can families support someone living with Alzheimer’s?”
 
-Pushing model to hub
+The assistant provides concise, trusted, knowledge-based responses, improving accessibility to healthcare information.
 
-📦 Model Deployment
+---
 
-After training:
+## 📈 Key Learnings
 
-Model is automatically pushed to Hugging Face Model Hub
+- Domain adaptation significantly improves model relevance
+- Balanced datasets enhance generalization
+- Mini language models can be efficient for healthcare applications
+- AutoTrain simplifies end-to-end fine-tuning workflows
+- Lightweight models are suitable for CPU-based deployment
 
-Search using your username
+---
 
-Model can be accessed via model ID
+## 🔮 Future Improvements
 
-🌐 Gradio Interface
+- Expand dataset size
+- Integrate Retrieval-Augmented Generation (RAG)
+- Add evaluation metrics (Precision@K, cosine similarity benchmarking)
+- Deploy as a public Hugging Face Space
+- Add disclaimer for medical advisory limitations
 
-A simple Gradio web interface is created in Google Colab to:
+---
 
-Load fine-tuned model
+## ⚠️ Disclaimer
 
-Accept user medical queries
+This model is built for educational purposes and should not be used as a substitute for professional medical advice.
 
-Display generated answers
+---
 
-Compare fine-tuned vs base model performance
+## 📬 Author
 
-📈 Expected Outcomes
+**Raju Kumar**  
+AI & Transformation Professional  
+Focused on AI-driven healthcare and domain-specific LLM applications
 
-Improved domain relevance
+---
 
-Better semantic alignment between questions and answers
+## 📌 License
 
-Balanced performance across medical topics
+This project is created for academic and demonstration purposes.
 
-Lightweight deployable healthcare assistant
-
-🔐 Governance & Ethical Considerations
-
-Intended for educational purposes
-
-Not a replacement for professional medical advice
-
-Designed using curated and trusted medical Q&A sources
-
-Demonstrates domain adaptation methodology
-
-🛠 Tech Stack
-
-Hugging Face AutoTrain
-
-sentence-transformers
-
-MiniLM
-
-Gradio
-
-Google Colab
-
-Python
-
-🔮 Future Enhancements
-
-Expand dataset size
-
-Add evaluation metrics (F1, accuracy, recall)
-
-Integrate RAG architecture
-
-Deploy as API endpoint
-
-Add monitoring & model governance layer
-
-Explore MLOps pipeline integration
-
-👤 Author
-
-Raju Kumar
-AI/ML | Generative AI | Pharma Digital Transformation
-Hyderabad, India
