@@ -170,7 +170,11 @@ The assistant provides concise, trusted, knowledge-based responses, improving ac
 - Add disclaimer for medical advisory limitations
 
 ---
+## 🔮 Click the link below for Live Demo
 
+https://bdfb03ba6b8fa07bea.gradio.live
+
+---
 ## ⚠️ Disclaimer
 
 This model is built for educational purposes and should not be used as a substitute for professional medical advice.
