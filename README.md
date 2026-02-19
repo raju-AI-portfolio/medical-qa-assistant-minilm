@@ -172,7 +172,7 @@ The assistant provides concise, trusted, knowledge-based responses, improving ac
 ---
 ## 🔮 Click the link below for Live Demo
 
-https://bdfb03ba6b8fa07bea.gradio.live
+https://8d8c46aebf5d011cbe.gradio.live
 
 ---
 ## ⚠️ Disclaimer
