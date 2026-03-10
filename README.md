@@ -94,6 +94,12 @@ The balanced sampling ensures uniform representation across medical domains.
 ```
 
 ---
+**AI Architechture**
+
+<img width="1600" height="612" alt="image" src="https://github.com/user-attachments/assets/e1434db4-5298-413b-864d-043c496f964e" />
+
+
+---
 
 ## 🚀 Implementation Steps
 
